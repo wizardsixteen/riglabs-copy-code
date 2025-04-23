@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Code Snippet</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+</head>
+<body>
+  <div class="chatgpt-code-block">
+    <div class="code-header">
+      <div class="code-label">
+        <a href="https://riglabs.co" target="_blank" rel="noopener noreferrer" class="logo-link">
+          <img src="./logo.svg" alt="Riglabs Logo">
+        </a>
+      </div>
+      <div class="header-buttons">
+        <button id="theme-toggle" class="theme-btn" title="Toggle theme">
+          <span class="material-icons-outlined">dark_mode</span>
+        </button>
+        <button id="share-button" class="theme-btn share-btn" title="Share code">
+          <span class="material-icons-outlined">link</span>
+        </button>
+        <button id="copy-button" class="copy-btn" title="Copy code">
+          <span class="material-icons-outlined">content_copy</span>
+          <span>Copy code</span>
+        </button>
+      </div>
+    </div>
+    <pre><code id="code-content">Loading...</code></pre>
+    <div class="code-footer">
+      <span>Paste this code in your Arduino IDE</span>
+      <span>Made with ❤️ for <a href="https://riglabs.co" target="_blank">riglabs.co</a> ✨</span></div>
+    <span id="copy-status" class="copy-status"></span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
