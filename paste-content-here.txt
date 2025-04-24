@@ -1,66 +1,21 @@
-#include <DHT.h>
+#include<Servo.h>
+Servo my_servo;
+int pos=0;
 
-// Pin Definitions
-#define DHTPIN 2          // DHT11 data pin
-#define DHTTYPE DHT11
-#define PIRPIN 3          // PIR motion sensor pin
-#define LDRPIN A0         // LDR analog pin
-#define RELAYPIN 4        // Relay to control fan/light
-
-// DHT sensor instance
-DHT dht(DHTPIN, DHTTYPE);
-
-// Variables
-float temperature;
-float humidity;
-int lightLevel;
-bool motionDetected;
-unsigned long lastPrintTime = 0;
-const unsigned long printInterval = 2000;
-
-void setup() {
-  Serial.begin(9600);
-  dht.begin();
-
-  pinMode(PIRPIN, INPUT);
-  pinMode(RELAYPIN, OUTPUT);
-  digitalWrite(RELAYPIN, LOW);  // Ensure relay is off initially
-
-  Serial.println("Home Automation System Initialized");
+void setup()
+{
+ my_servo.attach(9); 
 }
-
-void loop() {
-  // Read sensors
-  humidity = dht.readHumidity();
-  temperature = dht.readTemperature();
-  motionDetected = digitalRead(PIRPIN);
-  lightLevel = analogRead(LDRPIN);
-
-  // Check if any reads failed
-  if (isnan(temperature) || isnan(humidity)) {
-    Serial.println("Failed to read from DHT sensor!");
-    return;
-  }
-
-  // Logic to control relay (fan/light)
-  if (temperature > 30 || motionDetected) {
-    digitalWrite(RELAYPIN, HIGH); // Turn ON fan/light
-  } else {
-    digitalWrite(RELAYPIN, LOW);  // Turn OFF fan/light
-  }
-
-  // Print data at intervals
-  if (millis() - lastPrintTime >= printInterval) {
-    lastPrintTime = millis();
-    Serial.print("Temp: ");
-    Serial.print(temperature);
-    Serial.print("°C, Humidity: ");
-    Serial.print(humidity);
-    Serial.print("%, Light: ");
-    Serial.print(lightLevel);
-    Serial.print(", Motion: ");
-    Serial.print(motionDetected ? "YES" : "NO");
-    Serial.print(", Fan/Light: ");
-    Serial.println(digitalRead(RELAYPIN) ? "ON" : "OFF");
+void loop()
+{
+  for (pos=0;pos<=180;pos++)
+   {
+    my_servo.write(pos);
+    delay(2);
+   }
+  for (pos=180;pos>=0;pos--)
+  {
+    my_servo.write(pos);
+    delay(2);
   }
 }
